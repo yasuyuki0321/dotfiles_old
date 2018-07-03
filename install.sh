@@ -1,7 +1,7 @@
 #!/bin/bash
 
-dirs="'~/.local/bin' '~/.viml/clors'"
-for dir in `echo dirs`
+dirs=`echo ~/.local/bin ~/.vim/colors`
+for dir in `echo ${dirs}`
 do
   mkdir -p ${dir}
 done
@@ -9,7 +9,7 @@ done
 if [ ! `which git` ]; then
    sudo yum install git -y
    cp -p /usr/share/doc/git-*/contrib/completion/git-completion.bash ~/.local/bin/.
-   echo "source ~/.local/bin/git-completion.bash" >> ~/.bash_profile
+   echo 'source ~/.local/bin/git-completion.bash' >> ~/.bash_profile
 fi
 
 if [ ! `which aws` ]; then
@@ -27,7 +27,7 @@ if [ ! -d ~/.anyenv ] ; then
 fi
 
 if [ ! -f  ~/.local/bin/direnv ]; then
-    curl -L -o ~/.local/bin/direnv https://github.com/zimbatm/direnv/releases/download/v2.17.0/direnv.linux-amd64
+    curl -s -L -o ~/.local/bin/direnv https://github.com/zimbatm/direnv/releases/download/v2.17.0/direnv.linux-amd64
     chmod +x ~/.local/bin/direnv
 fi
 
@@ -38,8 +38,8 @@ fi
 cd ${HOME}/dotfiles
 for file in .??*
 do
-    [[ ${file} == ".git" ]] && continue
-    [[ ${file} == ".DS_Store" ]] && continue
+    [[ ${file} == '.git' ]] && continue
+    [[ ${file} == '.DS_Store' ]] && continue
 
     \cp -pf ${file} ${HOME}/.
 done
